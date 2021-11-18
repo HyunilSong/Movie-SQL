@@ -22,18 +22,23 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Sign Up</h3>
-                        <form action="#">
+                        <form action="{% url 'signup' %}" method="post">
+                            {% csrf_token %}
                             <div class="input__item">
-                                <input type="text" placeholder="Email address">
-                                <span class="icon_mail"></span>
-                            </div>
-                            <div class="input__item">
-                                <input type="text" placeholder="Your Name">
+                                <input type="text" placeholder="Your Name" name ="username">
                                 <span class="icon_profile"></span>
                             </div>
                             <div class="input__item">
-                                <input type="text" placeholder="Password">
+                                <input type="text" placeholder="Password" name="password1">
                                 <span class="icon_lock"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Check your password" name="password2">
+                                <span class="icon_lock"></span>
+                            </div>
+                            <div class="input__item">
+                                <input type="text" placeholder="Phone number" name="phone_number">
+                                <span class="icon_mail"></span>
                             </div>
                             <button type="submit" class="site-btn">Login Now</button>
                         </form>
