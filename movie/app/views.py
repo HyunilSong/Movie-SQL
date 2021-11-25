@@ -15,7 +15,7 @@ def home(request):
 def movie_detail(request):
     return render(request, 'movie-detail.html')
 
-def signup(request):
+def signup_view(request):
 
     # POST 방식으로 요청이 들어올 경우.
     if request.method == "POST":
@@ -30,7 +30,8 @@ def signup(request):
             print(request.POST['username'])
             custom_user.save()
 
-            login(request, custom_user.username)
+            user = authenticate(request=request, username=custom_user.username, password=custom_user.password)
+            login(request, user)
             return redirect("main")
         
         # 패스워드가 다른 경우
@@ -45,7 +46,22 @@ def signup(request):
         return render(request, 'signup.html', context)
 
 def login_view(request):
-    return render(request, 'login.html')
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request=request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+        else:
+            print("유저의 형식이 옳지 않습니다.")
+        return redirect("main")
+    else:
+        return render(request, 'login.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect("main")
+    
 
 def events(request):
     return render(request, 'events.html')
