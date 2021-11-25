@@ -1,7 +1,16 @@
 from django.db import models
 
+from django.contrib.auth.models import AbstractUser
+
 # Create your models here.
 
+
+# User model
+class CustomerUser(AbstractUser):
+    rank = models.CharField(max_length=5)
+    phone_number = models.TextField()
+
+# Movie model
 class Movie_info(models.Model):
     movie_id = models.CharField(max_length= 10)
     movie_name = models.TextField()
